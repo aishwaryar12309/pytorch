@@ -27,6 +27,8 @@ Tensor channel_shuffle_cpu(const Tensor& self, int64_t groups) {
   TORCH_CHECK(groups > 0,
               "Number of groups to divide channels in must be positive.",
               " Value of groups:", groups);
+  TORCH_CHECK((groups <= c),
+              "Number of groups cannot exceed number of channels.");
   TORCH_CHECK((c % groups) == 0,
               "Number of channels must be divisible by groups. Got ",
               c, " channels and ", groups, " groups.");
